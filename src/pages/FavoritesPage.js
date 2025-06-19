@@ -4,7 +4,7 @@ import SQLite from "react-native-sqlite-storage";
 
 SQLite.enablePromise(true);
 
-const dbName = "bioconnect.db";
+const dbName = "bioconnect.db"; 
 let db;
 
 const FavoritesPage = ({ navigation }) => {
