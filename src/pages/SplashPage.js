@@ -13,7 +13,7 @@ const SplashPage = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Mon App</Text>
+      <Text style={styles.title}>Bio Connect</Text>
       <ActivityIndicator size="large" color="#0000ff" />
     </View>
   );

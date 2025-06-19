@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import SQLite from "react-native-sqlite-storage";
+import DefaultPage from "./DefaultPage";
 
 SQLite.enablePromise(true);
 
@@ -72,18 +73,20 @@ const FavoritesPage = ({ navigation }) => {
     );
 
     return (
-        <View style={styles.container}>
-            {favorites.length === 0 ? (
-                <Text style={styles.empty}>Aucun favori pour l’instant.</Text>
-            ) : (
-                <FlatList
-                    data={favorites}
-                    keyExtractor={item => item.id}
-                    renderItem={renderItem}
-                />
-            )}
-            <Text style={styles.info}>Appui long pour supprimer un favori.</Text>
-        </View>
+        <DefaultPage>
+            <View style={styles.container}>
+                {favorites.length === 0 ? (
+                    <Text style={styles.empty}>Aucun favori pour l’instant.</Text>
+                ) : (
+                    <FlatList
+                        data={favorites}
+                        keyExtractor={item => item.id}
+                        renderItem={renderItem}
+                    />
+                )}
+                <Text style={styles.info}>Appui long pour supprimer un favori.</Text>
+            </View>
+        </DefaultPage>
     );
 };
 
