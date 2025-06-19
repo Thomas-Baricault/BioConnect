@@ -1,8 +1,98 @@
 {
-  "root": "/home/user/git-projects/reactnativetest",
-  "reactNativePath": "/home/user/git-projects/reactnativetest/node_modules/react-native",
+  "root": "C:\\Temp\\BioConnect",
+  "reactNativePath": "C:\\Temp\\BioConnect\\node_modules\\react-native",
   "reactNativeVersion": "0.79",
-  "dependencies": {},
+  "dependencies": {
+    "react-native-safe-area-context": {
+      "root": "C:\\Temp\\BioConnect\\node_modules\\react-native-safe-area-context",
+      "name": "react-native-safe-area-context",
+      "platforms": {
+        "ios": {
+          "podspecPath": "C:\\Temp\\BioConnect\\node_modules\\react-native-safe-area-context\\react-native-safe-area-context.podspec",
+          "version": "5.4.0",
+          "configurations": [],
+          "scriptPhases": []
+        },
+        "android": {
+          "sourceDir": "C:\\Temp\\BioConnect\\node_modules\\react-native-safe-area-context\\android",
+          "packageImportPath": "import com.th3rdwave.safeareacontext.SafeAreaContextPackage;",
+          "packageInstance": "new SafeAreaContextPackage()",
+          "buildTypes": [],
+          "libraryName": "safeareacontext",
+          "componentDescriptors": [
+            "RNCSafeAreaProviderComponentDescriptor",
+            "RNCSafeAreaViewComponentDescriptor"
+          ],
+          "cmakeListsPath": "C:/Temp/BioConnect/node_modules/react-native-safe-area-context/android/src/main/jni/CMakeLists.txt",
+          "cxxModuleCMakeListsModuleName": null,
+          "cxxModuleCMakeListsPath": null,
+          "cxxModuleHeaderName": null,
+          "isPureCxxDependency": false
+        }
+      }
+    },
+    "react-native-screens": {
+      "root": "C:\\Temp\\BioConnect\\node_modules\\react-native-screens",
+      "name": "react-native-screens",
+      "platforms": {
+        "ios": {
+          "podspecPath": "C:\\Temp\\BioConnect\\node_modules\\react-native-screens\\RNScreens.podspec",
+          "version": "4.10.0",
+          "configurations": [],
+          "scriptPhases": []
+        },
+        "android": {
+          "sourceDir": "C:\\Temp\\BioConnect\\node_modules\\react-native-screens\\android",
+          "packageImportPath": "import com.swmansion.rnscreens.RNScreensPackage;",
+          "packageInstance": "new RNScreensPackage()",
+          "buildTypes": [],
+          "libraryName": "rnscreens",
+          "componentDescriptors": [
+            "RNSFullWindowOverlayComponentDescriptor",
+            "RNSScreenContainerComponentDescriptor",
+            "RNSScreenNavigationContainerComponentDescriptor",
+            "RNSScreenStackHeaderConfigComponentDescriptor",
+            "RNSScreenStackHeaderSubviewComponentDescriptor",
+            "RNSScreenStackComponentDescriptor",
+            "RNSSearchBarComponentDescriptor",
+            "RNSScreenComponentDescriptor",
+            "RNSScreenFooterComponentDescriptor",
+            "RNSScreenContentWrapperComponentDescriptor",
+            "RNSModalScreenComponentDescriptor"
+          ],
+          "cmakeListsPath": "C:/Temp/BioConnect/node_modules/react-native-screens/android/src/main/jni/CMakeLists.txt",
+          "cxxModuleCMakeListsModuleName": null,
+          "cxxModuleCMakeListsPath": null,
+          "cxxModuleHeaderName": null,
+          "isPureCxxDependency": false
+        }
+      }
+    },
+    "react-native-sqlite-storage": {
+      "root": "C:\\Temp\\BioConnect\\node_modules\\react-native-sqlite-storage",
+      "name": "react-native-sqlite-storage",
+      "platforms": {
+        "ios": {
+          "podspecPath": "C:\\Temp\\BioConnect\\node_modules\\react-native-sqlite-storage\\react-native-sqlite-storage.podspec",
+          "version": "6.0.1",
+          "configurations": [],
+          "scriptPhases": []
+        },
+        "android": {
+          "sourceDir": "C:\\Temp\\BioConnect\\node_modules\\react-native-sqlite-storage\\platforms\\android",
+          "packageImportPath": "import org.pgsqlite.SQLitePluginPackage;",
+          "packageInstance": "new SQLitePluginPackage()",
+          "buildTypes": [],
+          "componentDescriptors": [],
+          "cmakeListsPath": "C:/Temp/BioConnect/node_modules/react-native-sqlite-storage/platforms/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cxxModuleCMakeListsModuleName": null,
+          "cxxModuleCMakeListsPath": null,
+          "cxxModuleHeaderName": null,
+          "isPureCxxDependency": false
+        }
+      }
+    }
+  },
   "commands": [
     {
       "name": "bundle",
@@ -165,7 +255,7 @@
         {
           "name": "--path <path>",
           "description": "Path to the React Native project root.",
-          "default": "/home/user/git-projects/reactnativetest"
+          "default": "C:\\Temp\\BioConnect"
         },
         {
           "name": "--platform <string>",
@@ -222,7 +312,7 @@
         {
           "name": "--terminal <string>",
           "description": "Launches the Metro Bundler in a new window using the specified terminal path.",
-          "default": "xterm-256color"
+          "default": "cmd.exe"
         },
         {
           "name": "--binary-path <string>",
@@ -382,7 +472,7 @@
         {
           "name": "--terminal <string>",
           "description": "Launches the Metro Bundler in a new window using the specified terminal path.",
-          "default": "xterm-256color"
+          "default": "cmd.exe"
         },
         {
           "name": "--appId <string>",
@@ -457,7 +547,7 @@
   "assets": [],
   "project": {
     "ios": {
-      "sourceDir": "/home/user/git-projects/reactnativetest/ios",
+      "sourceDir": "C:\\Temp\\BioConnect\\ios",
       "xcodeProject": {
         "name": "reactnativetest.xcodeproj",
         "path": ".",
@@ -466,7 +556,7 @@
       "assets": []
     },
     "android": {
-      "sourceDir": "/home/user/git-projects/reactnativetest/android",
+      "sourceDir": "C:\\Temp\\BioConnect\\android",
       "appName": "app",
       "packageName": "com.reactnativetest",
       "applicationId": "com.reactnativetest",

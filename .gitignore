@@ -1,2 +1,15 @@
 node_modules/
-
+# Fichiers de configuration sensibles
+# android/gradle.properties
+ 
+# Dossiers de build et de cache générés par Gradle
+android/.gradle/
+android/app/build/
+android/build/
+android/.idea/
+android/captures/
+android/*.iml
+ 
+# Dossiers C/C++ natifs
+android/app/.cxx/
+android/app/src/main/jniLibs/

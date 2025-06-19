@@ -7,13 +7,23 @@
  */
 
 #include "autolinking.h"
-
+#include <safeareacontext.h>
+#include <react/renderer/components/safeareacontext/ComponentDescriptors.h>
+#include <rnscreens.h>
+#include <react/renderer/components/rnscreens/ComponentDescriptors.h>
 
 namespace facebook {
 namespace react {
 
 std::shared_ptr<TurboModule> autolinking_ModuleProvider(const std::string moduleName, const JavaTurboModule::InitParams &params) {
-
+auto module_safeareacontext = safeareacontext_ModuleProvider(moduleName, params);
+if (module_safeareacontext != nullptr) {
+return module_safeareacontext;
+}
+auto module_rnscreens = rnscreens_ModuleProvider(moduleName, params);
+if (module_rnscreens != nullptr) {
+return module_rnscreens;
+}
   return nullptr;
 }
 
@@ -23,7 +33,19 @@ std::shared_ptr<TurboModule> autolinking_cxxModuleProvider(const std::string mod
 }
 
 void autolinking_registerProviders(std::shared_ptr<ComponentDescriptorProviderRegistry const> providerRegistry) {
-
+providerRegistry->add(concreteComponentDescriptorProvider<RNCSafeAreaProviderComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNCSafeAreaViewComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNSFullWindowOverlayComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNSScreenContainerComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNSScreenNavigationContainerComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNSScreenStackHeaderConfigComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNSScreenStackHeaderSubviewComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNSScreenStackComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNSSearchBarComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNSScreenComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNSScreenFooterComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNSScreenContentWrapperComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNSModalScreenComponentDescriptor>());
   return;
 }
 

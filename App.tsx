@@ -8,43 +8,56 @@
 import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SplashScreen from './src/components/SplashScreen';
-import Accueil from './src/components/Accueil';
-import ApiPage from './src/components/ApiPage';
-import AffichageDonnees from './src/components/AffichageDonnees';
-import { initDatabase, closeDatabase } from './src/services/migrations/index.js';
+// import { initDatabase, closeDatabase } from './src/services/migrations/index.js';
+import DetailsPage from './src/pages/DetailsPage.js';
+import FavoritesPage from './src/pages/FavoritesPage.js';
+import PreferencesPage from './src/pages/PreferencesPage.js';
+import SearchPage from './src/pages/SearchPage.js';
+import SplashPage from './src/pages/SplashPage.js';
 
 const Stack = createNativeStackNavigator();
 
 function App(): React.JSX.Element {
-  useEffect(() => {
-    // Ouvrir la base de données au montage de l'application
-    initDatabase()
-      .then(() => console.log('Database initialized successfully.'))
-      .catch(error => console.error('Failed to initialize database:', error));
+  // useEffect(() => {
+  //   // Ouvrir la base de données au montage de l'application
+  //   initDatabase()
+  //     .then(() => console.log('Database initialized successfully.'))
+  //     .catch(error => console.error('Failed to initialize database:', error));
 
-    // Fermer la base de données à la fin de vie de l'application (optionnel, mais bonne pratique)
-    return () => {
-      closeDatabase();
-    };
-  }, []); // Le tableau vide assure que cela ne s'exécute qu'une fois
+  //   // Fermer la base de données à la fin de vie de l'application (optionnel, mais bonne pratique)
+  //   return () => {
+  //     closeDatabase();
+  //   };
+  // }, []); // Le tableau vide assure que cela ne s'exécute qu'une fois
 
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Splash">
         <Stack.Screen
-          name="Splash"
-          component={SplashScreen}
+          name="Details"
+          component={DetailsPage}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Accueil"
-          component={Accueil}
+          name="Favorites"
+          component={FavoritesPage}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="ApiPage" component={ApiPage} options={{ title: 'Page API' }} />
-        <Stack.Screen name="AffichageDonnees" component={AffichageDonnees} options={{ title: 'Données internes' }} />
-
+        <Stack.Screen
+          name="Preferences"
+          component={PreferencesPage}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Search"
+          component={SearchPage}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Splash"
+          component={SplashPage}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
