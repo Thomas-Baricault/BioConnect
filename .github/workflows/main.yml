@@ -51,9 +51,15 @@ jobs:
           cd android && ./gradlew assembleRelease 
           mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/${{ env.APP_NAME }}.apk
         env:
-          SIGNING_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
-          SIGNING_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-          SIGNING_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+          MYAPP_UPLOAD_STORE_FILE: ../my-upload-key.keystore
+
+          MYAPP_UPLOAD_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          MYAPP_UPLOAD_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+          MYAPP_UPLOAD_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+
+          ORG_GRADLE_PROJECT_reactNativeArchitectures: "armeabi-v7a,arm64-v8a,x86,x86_64"
+          ORG_GRADLE_PROJECT_newArchEnabled: "true"
+          ORG_GRADLE_PROJECT_hermesEnabled: "true"
 
       - name: Delete previous APK build artifacts
         uses: actions/github-script@v7
