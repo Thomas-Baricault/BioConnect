@@ -7,6 +7,8 @@
  */
 
 #include "autolinking.h"
+#include <RNMapsSpecs.h>
+#include <react/renderer/components/RNMapsSpecs/ComponentDescriptors.h>
 #include <safeareacontext.h>
 #include <react/renderer/components/safeareacontext/ComponentDescriptors.h>
 #include <rnscreens.h>
@@ -16,6 +18,10 @@ namespace facebook {
 namespace react {
 
 std::shared_ptr<TurboModule> autolinking_ModuleProvider(const std::string moduleName, const JavaTurboModule::InitParams &params) {
+auto module_RNMapsSpecs = RNMapsSpecs_ModuleProvider(moduleName, params);
+if (module_RNMapsSpecs != nullptr) {
+return module_RNMapsSpecs;
+}
 auto module_safeareacontext = safeareacontext_ModuleProvider(moduleName, params);
 if (module_safeareacontext != nullptr) {
 return module_safeareacontext;
@@ -33,6 +39,16 @@ std::shared_ptr<TurboModule> autolinking_cxxModuleProvider(const std::string mod
 }
 
 void autolinking_registerProviders(std::shared_ptr<ComponentDescriptorProviderRegistry const> providerRegistry) {
+providerRegistry->add(concreteComponentDescriptorProvider<RNMapsCalloutComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNMapsCircleComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNMapsGoogleMapViewComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNMapsGooglePolygonComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNMapsMapViewComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNMapsMarkerComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNMapsOverlayComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNMapsPolylineComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNMapsUrlTileComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNMapsWMSTileComponentDescriptor>());
 providerRegistry->add(concreteComponentDescriptorProvider<RNCSafeAreaProviderComponentDescriptor>());
 providerRegistry->add(concreteComponentDescriptorProvider<RNCSafeAreaViewComponentDescriptor>());
 providerRegistry->add(concreteComponentDescriptorProvider<RNSFullWindowOverlayComponentDescriptor>());

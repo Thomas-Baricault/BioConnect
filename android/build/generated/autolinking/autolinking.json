@@ -3,6 +3,42 @@
   "reactNativePath": "C:\\Temp\\BioConnect\\node_modules\\react-native",
   "reactNativeVersion": "0.79",
   "dependencies": {
+    "react-native-maps": {
+      "root": "C:\\Temp\\BioConnect\\node_modules\\react-native-maps",
+      "name": "react-native-maps",
+      "platforms": {
+        "ios": {
+          "podspecPath": "C:\\Temp\\BioConnect\\node_modules\\react-native-maps\\react-native-maps.podspec",
+          "version": "1.24.3",
+          "configurations": [],
+          "scriptPhases": []
+        },
+        "android": {
+          "sourceDir": "C:\\Temp\\BioConnect\\node_modules\\react-native-maps\\android",
+          "packageImportPath": "import com.rnmaps.maps.MapsPackage;",
+          "packageInstance": "new MapsPackage()",
+          "buildTypes": [],
+          "libraryName": "RNMapsSpecs",
+          "componentDescriptors": [
+            "RNMapsCalloutComponentDescriptor",
+            "RNMapsCircleComponentDescriptor",
+            "RNMapsGoogleMapViewComponentDescriptor",
+            "RNMapsGooglePolygonComponentDescriptor",
+            "RNMapsMapViewComponentDescriptor",
+            "RNMapsMarkerComponentDescriptor",
+            "RNMapsOverlayComponentDescriptor",
+            "RNMapsPolylineComponentDescriptor",
+            "RNMapsUrlTileComponentDescriptor",
+            "RNMapsWMSTileComponentDescriptor"
+          ],
+          "cmakeListsPath": "C:/Temp/BioConnect/node_modules/react-native-maps/android/src/main/jni/CMakeLists.txt",
+          "cxxModuleCMakeListsModuleName": null,
+          "cxxModuleCMakeListsPath": null,
+          "cxxModuleHeaderName": null,
+          "isPureCxxDependency": false
+        }
+      }
+    },
     "react-native-safe-area-context": {
       "root": "C:\\Temp\\BioConnect\\node_modules\\react-native-safe-area-context",
       "name": "react-native-safe-area-context",
