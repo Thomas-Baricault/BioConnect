@@ -108,20 +108,41 @@ function PreferencesPage() {
 };
 
 const styles = StyleSheet.create({
-    label: { fontSize: 16, marginTop: 16 },
+    container: {
+        flex: 1,
+        backgroundColor: '#f6f2db',
+        padding: 16,
+    },
+    label: { 
+        fontSize: 16, 
+        marginTop: 16, 
+        color: '#13472e',
+    },
     input: {
         borderWidth: 1,
-        borderColor: '#ccc',
+        borderColor: '#13472e',
         borderRadius: 6,
         padding: 8,
         marginTop: 4,
+        backgroundColor: '#f6f2db',
+        color: '#13472e',
     },
-    picker: { marginTop: 4 },
+    picker: { 
+        marginTop: 4,
+        backgroundColor: '#f6f2db',
+        color: '#13472e',
+        borderWidth: 1,
+        borderColor: '#13472e',
+        borderRadius: 6,
+    },
     switchRow: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         marginTop: 24,
+        backgroundColor: '#f6f2db',
+        borderRadius: 6,
+        paddingHorizontal: 4,
     },
 });
 

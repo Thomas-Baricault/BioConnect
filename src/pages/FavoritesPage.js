@@ -94,18 +94,20 @@ const FavoritesPage = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-    container: { flex: 1, padding: 16, backgroundColor: "#fff" },
+    container: { flex: 1, padding: 16, backgroundColor: "#f6f2db" },
     card: {
-        backgroundColor: "#e6ffe6",
+        backgroundColor: "#f6f2db",
+        borderWidth: 1,
+        borderColor: "#13472e",
         padding: 16,
         borderRadius: 8,
         marginBottom: 12,
         elevation: 2,
     },
-    title: { fontSize: 18, fontWeight: "bold" },
-    address: { fontSize: 14, color: "#555" },
-    empty: { textAlign: "center", marginTop: 40, color: "#888" },
-    info: { textAlign: "center", marginTop: 16, color: "#aaa", fontSize: 12 },
+    title: { fontSize: 18, fontWeight: "bold", color: "#13472e" },
+    address: { fontSize: 14, color: "#13472e" },
+    empty: { textAlign: "center", marginTop: 40, color: "#13472e" },
+    info: { textAlign: "center", marginTop: 16, color: "#13472e", fontSize: 12 },
 });
 
 export default FavoritesPage;

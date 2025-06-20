@@ -80,19 +80,19 @@ const DetailsPage = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-    container: { padding: 20 },
-    title: { fontSize: 24, fontWeight: "bold", marginBottom: 16 },
-    label: { fontWeight: "bold", marginTop: 12 },
-    value: { marginBottom: 8 },
-    link: { color: "#007AFF", marginVertical: 8 },
+    container: { padding: 20, backgroundColor: "#f6f2db", flexGrow: 1 },
+    title: { fontSize: 24, fontWeight: "bold", marginBottom: 16, color: "#13472e" },
+    label: { fontWeight: "bold", marginTop: 12, color: "#13472e" },
+    value: { marginBottom: 8, color: "#13472e" },
+    link: { color: "#13472e", marginVertical: 8, textDecorationLine: "underline" },
     button: {
-        backgroundColor: "#4CAF50",
+        backgroundColor: "#13472e",
         padding: 14,
         borderRadius: 8,
         marginTop: 24,
         alignItems: "center"
     },
-    buttonText: { color: "#fff", fontWeight: "bold" }
+    buttonText: { color: "#f6f2db", fontWeight: "bold" }
 });
 
 export default DetailsPage;

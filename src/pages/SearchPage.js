@@ -264,21 +264,27 @@ const styles = StyleSheet.create({
     button: {
         paddingVertical: 10,
         paddingHorizontal: 15,
-        backgroundColor: '#7777ff',
+        backgroundColor: '#13472e',
         borderRadius: 5
     },
     input: {
         fontSize: 16,
-        color: 'black',
+        color: '#13472e',
         padding: 10,
-        backgroundColor: '#eeeeee',
-        marginBottom: 20
+        backgroundColor: '#f6f2db',
+        marginBottom: 20,
+        borderWidth: 1,
+        borderColor: '#13472e',
+        borderRadius: 6,
     },
     select: {
         fontSize: 16,
-        color: 'black',
-        backgroundColor: '#eeeeee',
-        marginBottom: 20
+        color: '#13472e',
+        backgroundColor: '#f6f2db',
+        marginBottom: 20,
+        borderWidth: 1,
+        borderColor: '#13472e',
+        borderRadius: 6,
     }
 });
 
