@@ -13,7 +13,7 @@ function Nav() {
             justifyContent:       'space-evenly',
             alignItems:           'center',
             gap:                  5,
-            padding:              10,
+            padding:              20,
             borderTopLeftRadius:  10,
             borderTopRightRadius: 10,
             backgroundColor:      '#eeeeee',
