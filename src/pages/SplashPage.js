@@ -7,7 +7,7 @@ const dbName = "bioconnect.db";
 
 const SplashPage = ({ navigation }) => {
   useEffect(() => {
-    SQLite.deleteDatabase({ name: dbName, location: 'default' })
+    // SQLite.deleteDatabase({ name: dbName, location: 'default' })
     const timer = setTimeout(() => {
       navigation.replace('Search');
     }, 1000);
