@@ -1,20 +1,32 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, Switch, StyleSheet } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import SQLite from "react-native-sqlite-storage";
+import DefaultPage from './DefaultPage';
 
 SQLite.enablePromise(true);
 
 const dbName = "bioconnect.db";
 let db;
 
-const PreferencesContext = createContext();
-
-export const PreferencesProvider = ({ children }) => {
+function PreferencesPage() {
     const [defaultAddress, setDefaultAddress] = useState('');
-    const [defaultRadius, setDefaultRadius] = useState('10');
     const [selectedType, setSelectedType] = useState('all');
-    const [useGeolocation, setUseGeolocation] = useState(true);
+    const [useGeolocation, setUseGeolocation] = useState(false);
 
-    // Charger et initialiser la BDD + préférences
+    const setAndSaveDefaultAddress = val => {
+        setDefaultAddress(val);
+        savePreference('defaultAddress', val);
+    };
+    const setAndSaveUseGeolocation = val => {
+        setUseGeolocation(val);
+        savePreference('useGeolocation', val);
+    };
+    const setAndSaveSelectedType = val => {
+        setSelectedType(val);
+        savePreference('selectedType', val);
+    };
+
     useEffect(() => {
         SQLite.openDatabase({ name: dbName, location: "default" })
             .then(database => {
@@ -29,7 +41,6 @@ export const PreferencesProvider = ({ children }) => {
             });
     }, []);
 
-    // Charger les préférences depuis la BDD
     const loadPreferences = () => {
         if (!db) return;
         db.executeSql("SELECT * FROM preferences;")
@@ -39,9 +50,8 @@ export const PreferencesProvider = ({ children }) => {
                     const { key, value } = rows.item(i);
                     switch (key) {
                         case 'defaultAddress': setDefaultAddress(value); break;
-                        case 'defaultRadius': setDefaultRadius(value); break;
-                        case 'selectedType': setSelectedType(value); break;
                         case 'useGeolocation': setUseGeolocation(value === 'true'); break;
+                        case 'selectedType': setSelectedType(value); break;
                         default: break;
                     }
                 }
@@ -51,7 +61,6 @@ export const PreferencesProvider = ({ children }) => {
             });
     };
 
-    // Sauvegarder une préférence dans la BDD
     const savePreference = (key, value) => {
         if (!db) return;
         db.executeSql(
@@ -62,96 +71,43 @@ export const PreferencesProvider = ({ children }) => {
         });
     };
 
-    // Wrappers pour setter + sauvegarder
-    const setAndSaveDefaultAddress = val => {
-        setDefaultAddress(val);
-        savePreference('defaultAddress', val);
-    };
-    const setAndSaveDefaultRadius = val => {
-        setDefaultRadius(val);
-        savePreference('defaultRadius', val);
-    };
-    const setAndSaveSelectedType = val => {
-        setSelectedType(val);
-        savePreference('selectedType', val);
-    };
-    const setAndSaveUseGeolocation = val => {
-        setUseGeolocation(val);
-        savePreference('useGeolocation', val);
-    };
-
     return (
-        <PreferencesContext.Provider value={{
-            defaultAddress, setDefaultAddress: setAndSaveDefaultAddress,
-            defaultRadius, setDefaultRadius: setAndSaveDefaultRadius,
-            selectedType, setSelectedType: setAndSaveSelectedType,
-            useGeolocation, setUseGeolocation: setAndSaveUseGeolocation
-        }}>
-            {children}
-        </PreferencesContext.Provider>
-    );
-};
-
-export const usePreferences = () => useContext(PreferencesContext);
-
-import { View, Text, TextInput, Switch, StyleSheet } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-
-export const PreferencesPage = () => {
-    const {
-        defaultAddress, setDefaultAddress,
-        defaultRadius, setDefaultRadius,
-        selectedType, setSelectedType,
-        useGeolocation, setUseGeolocation
-    } = usePreferences();
-
-    return (
-        <View style={styles.container}>
+        <DefaultPage>
             <Text style={styles.label}>Adresse par défaut :</Text>
             <TextInput
                 style={styles.input}
                 value={defaultAddress}
-                onChangeText={setDefaultAddress}
+                onChangeText={setAndSaveDefaultAddress}
                 placeholder="Entrez une adresse"
             />
-
-            <Text style={styles.label}>Rayon de recherche (km) :</Text>
-            <TextInput
-                style={styles.input}
-                value={defaultRadius}
-                onChangeText={setDefaultRadius}
-                keyboardType="numeric"
-                placeholder="10"
-            />
-
-            <Text style={styles.label}>Type de filtre par défaut :</Text>
-            <Picker
-                selectedValue={selectedType}
-                onValueChange={setSelectedType}
-                style={styles.picker}
-            >
-                <Picker.Item label="Tous" value="all" />
-                <Picker.Item label="VenteDetail" value="filtrerGrandeSurface" />
-                <Picker.Item label="Restaurants" value="filtrerRestaurants" />
-                <Picker.Item label="Grossistes" value="filtrerGrossistes" />
-                <Picker.Item label="GrandeSurface" value="filtrerGrandeSurface" />
-                <Picker.Item label="CommercantsEtArtisans" value="filtrerCommercantsEtArtisans" />
-                <Picker.Item label="MagasinSpec" value="filtrerMagasinSpec" />
-            </Picker>
 
             <View style={styles.switchRow}>
                 <Text style={styles.label}>Utiliser la géolocalisation :</Text>
                 <Switch
                     value={useGeolocation}
-                    onValueChange={setUseGeolocation}
+                    onValueChange={setAndSaveUseGeolocation}
                 />
             </View>
-        </View>
+
+            <Text style={styles.label}>Type de filtre par défaut :</Text>
+            <Picker
+                selectedValue={selectedType}
+                onValueChange={setAndSaveSelectedType}
+                style={styles.picker}
+            >
+                <Picker.Item label="Tout" value="all" />
+                <Picker.Item label="Vente au détail" value="filtrerGrandeSurface" />
+                <Picker.Item label="Restaurants" value="filtrerRestaurants" />
+                <Picker.Item label="Grossistes" value="filtrerGrossistes" />
+                <Picker.Item label="Grande surface" value="filtrerGrandeSurface" />
+                <Picker.Item label="Commerçants et artisans" value="filtrerCommercantsEtArtisans" />
+                <Picker.Item label="Magasin spécialisés" value="filtrerMagasinSpec" />
+            </Picker>
+        </DefaultPage>
     );
 };
 
 const styles = StyleSheet.create({
-    container: { flex: 1, padding: 20, backgroundColor: '#fff' },
     label: { fontSize: 16, marginTop: 16 },
     input: {
         borderWidth: 1,
@@ -168,3 +124,5 @@ const styles = StyleSheet.create({
         marginTop: 24,
     },
 });
+
+export default PreferencesPage;

@@ -15,7 +15,7 @@ const DetailsPage = ({ route, navigation }) => {
             .then(database => {
                 db = database;
                 return db.executeSql(
-                    "CREATE TABLE IF NOT EXISTS favorites (id TEXT PRIMARY KEY NOT NULL, name TEXT, address TEXT);"
+                    "CREATE TABLE IF NOT EXISTS favorites (id TEXT PRIMARY KEY NOT NULL, data TEXT);"
                 );
             })
             .catch(error => {
@@ -26,8 +26,8 @@ const DetailsPage = ({ route, navigation }) => {
     const addToFavorites = () => {
         if (!db) return;
         db.executeSql(
-            "INSERT OR REPLACE INTO favorites (id, name, address) VALUES (?, ?, ?);",
-            [operator.id, operator.denominationcourante, operator.adressesOperateurs?.lieu || ""]
+            "INSERT OR REPLACE INTO favorites (id, data) VALUES (?, ?);",
+            [operator.id, JSON.stringify(operator)]
         )
             .then(() => Alert.alert("Ajouté aux favoris"))
             .catch(() => Alert.alert("Erreur lors de l'ajout aux favoris"));

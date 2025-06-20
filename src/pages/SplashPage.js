@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator, Image } from 'react-native';
+import SQLite from 'react-native-sqlite-storage';
+
+SQLite.enablePromise(true);
+const dbName = "bioconnect.db"; 
 
 const SplashPage = ({ navigation }) => {
   useEffect(() => {
+    SQLite.deleteDatabase({ name: dbName, location: 'default' })
     const timer = setTimeout(() => {
       navigation.replace('Search');
-    }, 2000);
+    }, 1000);
     return () => clearTimeout(timer);
   }, [navigation]);
 

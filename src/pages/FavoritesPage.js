@@ -16,7 +16,7 @@ const FavoritesPage = ({ navigation }) => {
             .then(database => {
                 db = database;
                 return db.executeSql(
-                    "CREATE TABLE IF NOT EXISTS favorites (id TEXT PRIMARY KEY NOT NULL, name TEXT, address TEXT);"
+                    "CREATE TABLE IF NOT EXISTS favorites (id TEXT PRIMARY KEY NOT NULL, data TEXT);"
                 );
             })
             .then(fetchFavorites)
@@ -32,7 +32,10 @@ const FavoritesPage = ({ navigation }) => {
                 const rows = results.rows;
                 let items = [];
                 for (let i = 0; i < rows.length; i++) {
-                    items.push(rows.item(i));
+                    items.push({
+                        id: rows.item(i).id,
+                        data: JSON.parse(rows.item(i).data)
+                    });
                 }
                 setFavorites(items);
             })
@@ -65,10 +68,10 @@ const FavoritesPage = ({ navigation }) => {
         <TouchableOpacity
             style={styles.card}
             onLongPress={() => confirmRemove(item.id)}
-            onPress={() => navigation.navigate("OperatorDetails", { operatorId: item.id })}
+            onPress={() => navigation.navigate("Details", { operator: item.data })}
         >
-            <Text style={styles.title}>{item.name}</Text>
-            <Text style={styles.address}>{item.address}</Text>
+            <Text style={ styles.title }>{ item.data.denominationcourante }</Text>
+            <Text style={ styles.address }>{ item.data.adressesOperateurs.lieu } { item.data.adressesOperateurs.codePostal } { item.data.adressesOperateurs.ville }</Text>
         </TouchableOpacity>
     );
 

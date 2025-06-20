@@ -180,24 +180,54 @@
         }
       }
     },
-    "react-native-vector-icons": {
-      "root": "C:\\Temp\\BioConnect\\node_modules\\react-native-vector-icons",
-      "name": "react-native-vector-icons",
+    "react-native-svg": {
+      "root": "C:\\Temp\\BioConnect\\node_modules\\react-native-svg",
+      "name": "react-native-svg",
       "platforms": {
         "ios": {
-          "podspecPath": "C:\\Temp\\BioConnect\\node_modules\\react-native-vector-icons\\RNVectorIcons.podspec",
-          "version": "10.2.0",
+          "podspecPath": "C:\\Temp\\BioConnect\\node_modules\\react-native-svg\\RNSVG.podspec",
+          "version": "15.12.0",
           "configurations": [],
           "scriptPhases": []
         },
         "android": {
-          "sourceDir": "C:\\Temp\\BioConnect\\node_modules\\react-native-vector-icons\\android",
-          "packageImportPath": "import com.oblador.vectoricons.VectorIconsPackage;",
-          "packageInstance": "new VectorIconsPackage()",
+          "sourceDir": "C:\\Temp\\BioConnect\\node_modules\\react-native-svg\\android",
+          "packageImportPath": "import com.horcrux.svg.SvgPackage;",
+          "packageInstance": "new SvgPackage()",
           "buildTypes": [],
-          "libraryName": "RNVectorIconsSpec",
-          "componentDescriptors": [],
-          "cmakeListsPath": "C:/Temp/BioConnect/node_modules/react-native-vector-icons/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "libraryName": "rnsvg",
+          "componentDescriptors": [
+            "RNSVGCircleComponentDescriptor",
+            "RNSVGClipPathComponentDescriptor",
+            "RNSVGDefsComponentDescriptor",
+            "RNSVGFeBlendComponentDescriptor",
+            "RNSVGFeColorMatrixComponentDescriptor",
+            "RNSVGFeCompositeComponentDescriptor",
+            "RNSVGFeFloodComponentDescriptor",
+            "RNSVGFeGaussianBlurComponentDescriptor",
+            "RNSVGFeMergeComponentDescriptor",
+            "RNSVGFeOffsetComponentDescriptor",
+            "RNSVGFilterComponentDescriptor",
+            "RNSVGEllipseComponentDescriptor",
+            "RNSVGForeignObjectComponentDescriptor",
+            "RNSVGGroupComponentDescriptor",
+            "RNSVGImageComponentDescriptor",
+            "RNSVGLinearGradientComponentDescriptor",
+            "RNSVGLineComponentDescriptor",
+            "RNSVGMarkerComponentDescriptor",
+            "RNSVGMaskComponentDescriptor",
+            "RNSVGPathComponentDescriptor",
+            "RNSVGPatternComponentDescriptor",
+            "RNSVGRadialGradientComponentDescriptor",
+            "RNSVGRectComponentDescriptor",
+            "RNSVGSvgViewAndroidComponentDescriptor",
+            "RNSVGSymbolComponentDescriptor",
+            "RNSVGTextComponentDescriptor",
+            "RNSVGTextPathComponentDescriptor",
+            "RNSVGTSpanComponentDescriptor",
+            "RNSVGUseComponentDescriptor"
+          ],
+          "cmakeListsPath": "C:/Temp/BioConnect/node_modules/react-native-svg/android/src/main/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,
@@ -657,7 +687,9 @@
     "ios": {},
     "android": {}
   },
-  "assets": [],
+  "assets": [
+    "./node_modules/react-native-vector-icons/Fonts"
+  ],
   "project": {
     "ios": {
       "sourceDir": "C:\\Temp\\BioConnect\\ios",

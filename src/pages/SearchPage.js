@@ -3,8 +3,14 @@ import { StyleSheet, ScrollView, Text, TextInput, TouchableOpacity, View, Switch
 import { Picker } from '@react-native-picker/picker';
 import MapView from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
+import SQLite from "react-native-sqlite-storage";
 import { requestBioAPI } from '../services/API';
 import DefaultPage from './DefaultPage';
+
+SQLite.enablePromise(true);
+
+const dbName = "bioconnect.db";
+let db;
 
 const SearchPage = ({ navigation }) => {
     const NBPERPAGE = 10;
@@ -51,6 +57,38 @@ const SearchPage = ({ navigation }) => {
     };
 
     useEffect(search, [useCoords, address, coords, name, product, filter, page]);
+
+    useEffect(() => {
+        SQLite.openDatabase({ name: dbName, location: "default" })
+            .then(database => {
+                db = database;
+                return db.executeSql(
+                    "CREATE TABLE IF NOT EXISTS preferences (key TEXT PRIMARY KEY NOT NULL, value TEXT);"
+                );
+            })
+            .then(() => {
+                if (!db) return;
+                db.executeSql("SELECT * FROM preferences;")
+                    .then(([results]) => {
+                        const rows = results.rows;
+                        for (let i = 0; i < rows.length; i++) {
+                            const { key, value } = rows.item(i);
+                            switch (key) {
+                                case 'defaultAddress': setAddress(value); break;
+                                case 'useGeolocation': setUseCoords(value === 'true'); break;
+                                case 'selectedType': setFilter(value); break;
+                                default: break;
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        console.log("Erreur SELECT preferences :", error);
+                    });
+            })
+            .catch(error => {
+                console.log("Erreur ouverture/creation DB preferences :", error);
+            });
+    }, []);
 
     // useEffect(() => {
     //     if (useCoords) {

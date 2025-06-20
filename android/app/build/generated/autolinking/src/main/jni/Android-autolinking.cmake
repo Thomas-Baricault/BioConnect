@@ -12,7 +12,7 @@ add_subdirectory("C:/Temp/BioConnect/node_modules/react-native-maps/android/src/
 add_subdirectory("C:/Temp/BioConnect/node_modules/react-native-safe-area-context/android/src/main/jni/" safeareacontext_autolinked_build)
 add_subdirectory("C:/Temp/BioConnect/node_modules/react-native-screens/android/src/main/jni/" rnscreens_autolinked_build)
 
-add_subdirectory("C:/Temp/BioConnect/node_modules/react-native-vector-icons/android/build/generated/source/codegen/jni/" RNVectorIconsSpec_autolinked_build)
+add_subdirectory("C:/Temp/BioConnect/node_modules/react-native-svg/android/src/main/jni/" rnsvg_autolinked_build)
 
 set(AUTOLINKED_LIBRARIES
   react_codegen_rnpicker
@@ -21,5 +21,5 @@ set(AUTOLINKED_LIBRARIES
   react_codegen_safeareacontext
   react_codegen_rnscreens
   
-  react_codegen_RNVectorIconsSpec
+  react_codegen_rnsvg
 )
