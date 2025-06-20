@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
-import { ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, ScrollView, Text, TextInput, TouchableOpacity, View, Switch, PermissionsAndroid, Platform } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import MapView from 'react-native-maps';
+import Geolocation from 'react-native-geolocation-service';
 import { requestBioAPI } from '../services/API';
 import DefaultPage from './DefaultPage';
 
 const SearchPage = ({ navigation }) => {
     const NBPERPAGE = 10;
 
+    const [permission, setPermission] = useState(false);
     const [useCoords, setUseCoords] = useState(false);
     const [address, setAddress] = useState('');
-    const [coords, setCoords] = useState({ lat: 46.76416812552772, lng: 2.558369667859457 });
+    const [coords, setCoords] = useState({ latitude: 46.76416812552772, longitude: 2.558369667859457 });
     const [name, setName] = useState('');
     const [product, setProduct] = useState('');
     const [filter, setFilter] = useState('');
@@ -22,8 +25,8 @@ const SearchPage = ({ navigation }) => {
             debut: page
         };
         if (useCoords || true) {
-            params.lat = coords.lat;
-            params.lng = coords.lng;
+            params.lat = coords.latitude;
+            params.lng = coords.longitude;
         } else {}
         if (name) {
             params.nom = name;
@@ -31,55 +34,107 @@ const SearchPage = ({ navigation }) => {
         if (product) {
             params.produit = product;
         }
-        if (filter) {
+        if (filter !== 'all') {
             params[filter] = '1';
         }
         requestBioAPI(params, setOperators);
     };
 
-    useEffect(search, []);
+    const requestPermission = async () => {
+        if (!permission) {
+            setPermission(
+                Platform.OS === 'android'
+                ? (await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)) === PermissionsAndroid.RESULTS.GRANTED
+                : true
+            );
+        }
+    };
+
+    useEffect(search, [useCoords, address, coords, name, product, filter, page]);
+
+    // useEffect(() => {
+    //     if (useCoords) {
+    //         Geolocation.getCurrentPosition(
+    //             pos => setCoords(pos.coords),
+    //             err => setUseCoords(false),
+    //             { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+    //         );
+    //     }
+    // }, [useCoords]);
 
     return (
-        <DefaultPage>
-            <ScrollView>
-                <View>
+        <DefaultPage padding={ 0 }>
+            <ScrollView style={{
+                padding: 20
+            }}>
+                <View style={{
+                    marginBottom: 40
+                }}>
                     <TextInput
+                        style={ styles.input }
+                        placeholderTextColor='grey'
                         editable={ !useCoords }
                         placeholder='Adresse'
-                    >{ useCoords ? 'Moi' : address }</TextInput>
-                    <View>
+                        onChangeText={ address => setAddress(address) }
+                        value={ useCoords ? 'Moi' : address }
+                    />
+                    <View style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        gap: 10,
+                        marginBottom: 20
+                    }}>
                         <Switch
                             trackColor={{false: '#767577', true: '#81b0ff'}}
-                            thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+                            thumbColor={useCoords ? '#f5dd4b' : '#f4f3f4'}
                             ios_backgroundColor="#3e3e3e"
-                            onValueChange={ () => setUseCoords(!useCoords) }
+                            onValueChange={ async () => {
+                                await requestPermission();
+                                setUseCoords(permission && !useCoords);
+                            } }
                             value={ useCoords }
                         />
                         <Text>Utiliser ma position</Text>
                     </View>
                     <TextInput
+                        style={ styles.input }
+                        placeholderTextColor='grey'
                         placeholder='Nom'
                         onChangeText={ name => setName(name) }
-                    >{ name }</TextInput>
+                        value={ name }
+                    />
                     <TextInput
+                        style={ styles.input }
+                        placeholderTextColor='grey'
                         placeholder='Produit'
                         onChangeText={ product => setProduct(product) }
-                    >{ product }</TextInput>
-                    <RNPickerSelect
-                        items={[
-                            { label: 'Tout', value: '' },
-                            { label: 'Vente au détail', value: 'filtrerVenteDetail' },
-                            { label: 'Restaurants', value: 'filtrerRestaurants' },
-                            { label: 'Grossistes', value: 'filtrerGrossistes' },
-                            { label: 'Grande surface', value: 'filtrerGrandeSurface' },
-                            { label: 'Commerçants et artisans', value: 'filtrerCommercantsEtArtisans' },
-                            { label: 'Magasin spécialisés', value: 'filtrerMagasinSpec' },
-                        ]}
-                        onValueChange={filter => setFilter(filter)}
+                        value={ product }
                     />
-                    <TouchableOpacity onPress={ search }>Rechercher</TouchableOpacity>
+                    <Picker
+                        style={ styles.select }
+                        selectedValue={ filter }
+                        onValueChange={ filter => setFilter(filter) }
+                    >
+                        <Picker.Item label="Filtrer par: Tout" value="all"/>
+                        <Picker.Item label="Filtrer par: Vente au détail" value="filtrerVenteDetail"/>
+                        <Picker.Item label="Filtrer par: Restaurants" value="filtrerRestaurants"/>
+                        <Picker.Item label="Filtrer par: Grossistes" value="filtrerGrossistes"/>
+                        <Picker.Item label="Filtrer par: Grande surface" value="filtrerGrandeSurface"/>
+                        <Picker.Item label="Filtrer par: Commerçants et artisans" value="filtrerCommercantsEtArtisans"/>
+                        <Picker.Item label="Filtrer par: Magasin spécialisés" value="filtrerMagasinSpec"/>
+                    </Picker>
+                    <TouchableOpacity
+                        style={ styles.button }
+                        onPress={ search }
+                    >
+                        <Text style={{
+                            color: 'white',
+                            textAlign: 'center',
+                            fontSize: 16
+                        }}>Rechercher</Text>
+                    </TouchableOpacity>
                 </View>
-                <MapView initialRegion={{
+                {/* <MapView initialRegion={{
                     latitude: coords.lat,
                     longitude: coords.lng
                 }}>
@@ -98,8 +153,13 @@ const SearchPage = ({ navigation }) => {
                         ))
                         : null
                     }
-                </MapView>
-                <Text>{ operators.nbTotal } résultat{ operators.nbTotal === 1 ? '' : 's' }</Text>
+                </MapView> */}
+                <Text style={{
+                    fontSize: 16,
+                    color: 'black',
+                    textAlign: 'center',
+                    marginBottom: 20
+                }}>{ operators.nbTotal } résultat{ operators.nbTotal === 1 ? '' : 's' }</Text>
                 {
                     operators.nbTotal === 0
                     ? null
@@ -107,23 +167,52 @@ const SearchPage = ({ navigation }) => {
                         <View>
                             { operators.items.map((item, key) => (
                                 <TouchableOpacity
+                                    style={{
+                                        padding: 20,
+                                        backgroundColor: '#eeeeee',
+                                        marginBottom: 10,
+                                        borderRadius: 10,
+                                        flexDirection: 'column',
+                                        gap: 5
+                                    }}
                                     key={ key }
-                                    onPress={ () => navigation.navigate('Details', { id: item.id }) }
+                                    onPress={ () => navigation.navigate('Details', { operator: item }) }
                                 >
                                     <Text>{ item.denominationcourante }</Text>
                                     <Text>{ item.adressesOperateurs.lieu } { item.adressesOperateurs.codePostal } { item.adressesOperateurs.ville }</Text>
                                 </TouchableOpacity>
                             )) }
-                            <View>
+                            <View style={{
+                                flexDirection: 'row',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                gap: 20,
+                                marginTop: 20,
+                                marginBottom: 40
+                            }}>
                                 <TouchableOpacity
+                                    style={ styles.button }
                                     disabled={ page === 0 }
                                     onPress={ () => setPage(page-1) }
-                                >&lt;</TouchableOpacity>
-                                <Text>{ page } / { parseInt((operators.nbTotal-1)/NBPERPAGE) }</Text>
+                                >
+                                    <Text style={{
+                                        fontSize: 20,
+                                        color: 'white'
+                                    }}>&lt;</Text>
+                                </TouchableOpacity>
+                                <Text style={{
+                                    color: 'black'
+                                }}>{ page+1 } / { parseInt((operators.nbTotal-1)/NBPERPAGE) }</Text>
                                 <TouchableOpacity
+                                    style={ styles.button }
                                     disabled={ page === parseInt((operators.nbTotal-1)/NBPERPAGE) }
                                     onPress={ () => setPage(page+1) }
-                                >&lt;</TouchableOpacity>
+                                >
+                                    <Text style={{
+                                        fontSize: 20,
+                                        color: 'white'
+                                    }}>&gt;</Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     )
@@ -132,5 +221,27 @@ const SearchPage = ({ navigation }) => {
         </DefaultPage>
     );
 }
+
+const styles = StyleSheet.create({
+    button: {
+        paddingVertical: 10,
+        paddingHorizontal: 15,
+        backgroundColor: '#7777ff',
+        borderRadius: 5
+    },
+    input: {
+        fontSize: 16,
+        color: 'black',
+        padding: 10,
+        backgroundColor: '#eeeeee',
+        marginBottom: 20
+    },
+    select: {
+        fontSize: 16,
+        color: 'black',
+        backgroundColor: '#eeeeee',
+        marginBottom: 20
+    }
+});
 
 export default SearchPage;

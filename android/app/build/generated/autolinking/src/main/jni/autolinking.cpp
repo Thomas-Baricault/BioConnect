@@ -7,17 +7,24 @@
  */
 
 #include "autolinking.h"
+#include <rnpicker.h>
+#include <react/renderer/components/rnpicker/ComponentDescriptors.h>
 #include <RNMapsSpecs.h>
 #include <react/renderer/components/RNMapsSpecs/ComponentDescriptors.h>
 #include <safeareacontext.h>
 #include <react/renderer/components/safeareacontext/ComponentDescriptors.h>
 #include <rnscreens.h>
 #include <react/renderer/components/rnscreens/ComponentDescriptors.h>
+#include <RNVectorIconsSpec.h>
 
 namespace facebook {
 namespace react {
 
 std::shared_ptr<TurboModule> autolinking_ModuleProvider(const std::string moduleName, const JavaTurboModule::InitParams &params) {
+auto module_rnpicker = rnpicker_ModuleProvider(moduleName, params);
+if (module_rnpicker != nullptr) {
+return module_rnpicker;
+}
 auto module_RNMapsSpecs = RNMapsSpecs_ModuleProvider(moduleName, params);
 if (module_RNMapsSpecs != nullptr) {
 return module_RNMapsSpecs;
@@ -30,6 +37,10 @@ auto module_rnscreens = rnscreens_ModuleProvider(moduleName, params);
 if (module_rnscreens != nullptr) {
 return module_rnscreens;
 }
+auto module_RNVectorIconsSpec = RNVectorIconsSpec_ModuleProvider(moduleName, params);
+if (module_RNVectorIconsSpec != nullptr) {
+return module_RNVectorIconsSpec;
+}
   return nullptr;
 }
 
@@ -39,6 +50,8 @@ std::shared_ptr<TurboModule> autolinking_cxxModuleProvider(const std::string mod
 }
 
 void autolinking_registerProviders(std::shared_ptr<ComponentDescriptorProviderRegistry const> providerRegistry) {
+providerRegistry->add(concreteComponentDescriptorProvider<RNCAndroidDialogPickerComponentDescriptor>());
+providerRegistry->add(concreteComponentDescriptorProvider<RNCAndroidDropdownPickerComponentDescriptor>());
 providerRegistry->add(concreteComponentDescriptorProvider<RNMapsCalloutComponentDescriptor>());
 providerRegistry->add(concreteComponentDescriptorProvider<RNMapsCircleComponentDescriptor>());
 providerRegistry->add(concreteComponentDescriptorProvider<RNMapsGoogleMapViewComponentDescriptor>());

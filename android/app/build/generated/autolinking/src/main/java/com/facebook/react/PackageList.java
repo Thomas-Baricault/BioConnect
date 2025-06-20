@@ -10,6 +10,10 @@ import com.facebook.react.shell.MainReactPackage;
 import java.util.Arrays;
 import java.util.ArrayList;
 
+// @react-native-picker/picker
+import com.reactnativecommunity.picker.RNCPickerPackage;
+// react-native-geolocation-service
+import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 // react-native-maps
 import com.rnmaps.maps.MapsPackage;
 // react-native-safe-area-context
@@ -18,6 +22,8 @@ import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
 import com.swmansion.rnscreens.RNScreensPackage;
 // react-native-sqlite-storage
 import org.pgsqlite.SQLitePluginPackage;
+// react-native-vector-icons
+import com.oblador.vectoricons.VectorIconsPackage;
 
 public class PackageList {
   private Application application;
@@ -63,10 +69,13 @@ public class PackageList {
   public ArrayList<ReactPackage> getPackages() {
     return new ArrayList<>(Arrays.<ReactPackage>asList(
       new MainReactPackage(mConfig),
+      new RNCPickerPackage(),
+      new RNFusedLocationPackage(),
       new MapsPackage(),
       new SafeAreaContextPackage(),
       new RNScreensPackage(),
-      new SQLitePluginPackage()
+      new SQLitePluginPackage(),
+      new VectorIconsPackage()
     ));
   }
 }

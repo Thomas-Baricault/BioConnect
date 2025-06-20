@@ -3,6 +3,58 @@
   "reactNativePath": "C:\\Temp\\BioConnect\\node_modules\\react-native",
   "reactNativeVersion": "0.79",
   "dependencies": {
+    "@react-native-picker/picker": {
+      "root": "C:\\Temp\\BioConnect\\node_modules\\@react-native-picker\\picker",
+      "name": "@react-native-picker/picker",
+      "platforms": {
+        "ios": {
+          "podspecPath": "C:\\Temp\\BioConnect\\node_modules\\@react-native-picker\\picker\\RNCPicker.podspec",
+          "version": "2.11.0",
+          "configurations": [],
+          "scriptPhases": []
+        },
+        "android": {
+          "sourceDir": "C:\\Temp\\BioConnect\\node_modules\\@react-native-picker\\picker\\android",
+          "packageImportPath": "import com.reactnativecommunity.picker.RNCPickerPackage;",
+          "packageInstance": "new RNCPickerPackage()",
+          "buildTypes": [],
+          "libraryName": "rnpicker",
+          "componentDescriptors": [
+            "RNCAndroidDialogPickerComponentDescriptor",
+            "RNCAndroidDropdownPickerComponentDescriptor"
+          ],
+          "cmakeListsPath": "C:/Temp/BioConnect/node_modules/@react-native-picker/picker/android/src/main/jni/CMakeLists.txt",
+          "cxxModuleCMakeListsModuleName": null,
+          "cxxModuleCMakeListsPath": null,
+          "cxxModuleHeaderName": null,
+          "isPureCxxDependency": false
+        }
+      }
+    },
+    "react-native-geolocation-service": {
+      "root": "C:\\Temp\\BioConnect\\node_modules\\react-native-geolocation-service",
+      "name": "react-native-geolocation-service",
+      "platforms": {
+        "ios": {
+          "podspecPath": "C:\\Temp\\BioConnect\\node_modules\\react-native-geolocation-service\\react-native-geolocation-service.podspec",
+          "version": "5.3.1",
+          "configurations": [],
+          "scriptPhases": []
+        },
+        "android": {
+          "sourceDir": "C:\\Temp\\BioConnect\\node_modules\\react-native-geolocation-service\\android",
+          "packageImportPath": "import com.agontuk.RNFusedLocation.RNFusedLocationPackage;",
+          "packageInstance": "new RNFusedLocationPackage()",
+          "buildTypes": [],
+          "componentDescriptors": [],
+          "cmakeListsPath": "C:/Temp/BioConnect/node_modules/react-native-geolocation-service/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cxxModuleCMakeListsModuleName": null,
+          "cxxModuleCMakeListsPath": null,
+          "cxxModuleHeaderName": null,
+          "isPureCxxDependency": false
+        }
+      }
+    },
     "react-native-maps": {
       "root": "C:\\Temp\\BioConnect\\node_modules\\react-native-maps",
       "name": "react-native-maps",
@@ -121,6 +173,31 @@
           "buildTypes": [],
           "componentDescriptors": [],
           "cmakeListsPath": "C:/Temp/BioConnect/node_modules/react-native-sqlite-storage/platforms/android/build/generated/source/codegen/jni/CMakeLists.txt",
+          "cxxModuleCMakeListsModuleName": null,
+          "cxxModuleCMakeListsPath": null,
+          "cxxModuleHeaderName": null,
+          "isPureCxxDependency": false
+        }
+      }
+    },
+    "react-native-vector-icons": {
+      "root": "C:\\Temp\\BioConnect\\node_modules\\react-native-vector-icons",
+      "name": "react-native-vector-icons",
+      "platforms": {
+        "ios": {
+          "podspecPath": "C:\\Temp\\BioConnect\\node_modules\\react-native-vector-icons\\RNVectorIcons.podspec",
+          "version": "10.2.0",
+          "configurations": [],
+          "scriptPhases": []
+        },
+        "android": {
+          "sourceDir": "C:\\Temp\\BioConnect\\node_modules\\react-native-vector-icons\\android",
+          "packageImportPath": "import com.oblador.vectoricons.VectorIconsPackage;",
+          "packageInstance": "new VectorIconsPackage()",
+          "buildTypes": [],
+          "libraryName": "RNVectorIconsSpec",
+          "componentDescriptors": [],
+          "cmakeListsPath": "C:/Temp/BioConnect/node_modules/react-native-vector-icons/android/build/generated/source/codegen/jni/CMakeLists.txt",
           "cxxModuleCMakeListsModuleName": null,
           "cxxModuleCMakeListsPath": null,
           "cxxModuleHeaderName": null,

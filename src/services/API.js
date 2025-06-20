@@ -1,9 +1,10 @@
 function requestBioAPI(query, callback) {
-    return fetch(`https://opendata.agencebio.org/api/gouv/operateurs?${
+    fetch(`https://opendata.agencebio.org/api/gouv/operateurs?${
         Object.entries(query).map(e => `${e[0]}=${e[1]}`).join('&')
     }`)
-        .then(response => callback(response.json()))
-        .catch(error => callback({ nbTotal: 0 }));
+        .then(response => response.json())
+        .then(response => callback(response))
+        .catch(error => callback({ nbTotal: 0, error: error }));
 }
 
 export { requestBioAPI };
