@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator, Image } from 'react-native';
 
 const SplashPage = ({ navigation }) => {
-  const [loading, setLoading] = useState(true);
-
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
+    const timer = setTimeout(() => {
       navigation.replace('Search');
     }, 2000);
-  }, []);
+    return () => clearTimeout(timer);
+  }, [navigation]);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Bio Connect</Text>
+      <Image
+        source={require('../images/Bioconnect.png')}
+        style={styles.logo}
+        resizeMode="contain"
+      />
       <ActivityIndicator size="large" color="#0000ff" />
     </View>
   );
@@ -26,9 +28,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
+  logo: {
+    width: 200,
+    height: 200,
     marginBottom: 20,
   },
 });
